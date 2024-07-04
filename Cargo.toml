@@ -5,3 +5,6 @@ edition = "2021"
 
 [dependencies]
 winreg = "0.52.0"
+
+[build-dependencies]
+embed-resource = "2.4.2"

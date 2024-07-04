@@ -1,5 +1,6 @@
-use std::path::Path;
+#![cfg_attr(all(windows, not(debug_assertions)), windows_subsystem = "windows")]
 
+use std::path::Path;
 use winreg::{enums::HKEY_CURRENT_USER, RegKey};
 
 fn is_current_theme_light() -> bool {
@@ -36,6 +37,7 @@ fn swith_theme(dark: bool) {
 }
 
 fn main() {
+    println!("Hello, world!");
     let is_light = is_current_theme_light();
     swith_theme(!is_light);
 }
