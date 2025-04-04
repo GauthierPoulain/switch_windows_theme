@@ -2,9 +2,7 @@
 
 use winapi::{
     shared::minwindef::{LPARAM, WPARAM},
-    um::winuser::{
-        SendMessageTimeoutA, SendNotifyMessageA, HWND_BROADCAST, SMTO_ABORTIFHUNG, WM_SETTINGCHANGE,
-    },
+    um::winuser::{SendNotifyMessageA, HWND_BROADCAST, WM_SETTINGCHANGE},
 };
 use winreg::{enums::HKEY_CURRENT_USER, RegKey};
 
