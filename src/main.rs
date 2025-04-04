@@ -2,7 +2,9 @@
 
 use winapi::{
     shared::minwindef::{LPARAM, WPARAM},
-    um::winuser::{SendMessageTimeoutA, HWND_BROADCAST, SMTO_ABORTIFHUNG, WM_SETTINGCHANGE},
+    um::winuser::{
+        SendMessageTimeoutA, SendNotifyMessageA, HWND_BROADCAST, SMTO_ABORTIFHUNG, WM_SETTINGCHANGE,
+    },
 };
 use winreg::{enums::HKEY_CURRENT_USER, RegKey};
 
@@ -26,21 +28,12 @@ fn is_current_theme_dark() -> bool {
 
 fn send_settings_change_event() {
     unsafe {
-        let success = SendMessageTimeoutA(
+        SendNotifyMessageA(
             HWND_BROADCAST,
             WM_SETTINGCHANGE,
             0 as WPARAM,
             "ImmersiveColorSet\0".as_ptr() as LPARAM,
-            SMTO_ABORTIFHUNG,
-            5000,
-            std::ptr::null_mut(),
         );
-
-        if success == 0 {
-            println!("Failed to send WM_SETTINGCHANGE message.");
-            return;
-        }
-        println!("Sent WM_SETTINGCHANGE message successfully.");
     }
 }
 
